@@ -20,14 +20,14 @@ function [feats,R,win_posw,win_posh,winw,winh] = ...
   
   num_feats = 0;
 
-  %padding images 
+
   padw = 8; padh = 8;
 
   for s = 1:num_scales
     I = imresize(II,1/scales(s));
     I = padarray(I,[padh padw],'replicate');
 
-    %generate a bunch of locations
+
     [h w nch] = size(I);
     offsetw = max(border,floor(mod(w,stridew)/2))+1;
     offseth = max(border,floor(mod(h,strideh)/2))+1;
@@ -37,11 +37,11 @@ function [feats,R,win_posw,win_posh,winw,winh] = ...
     R = compute_gradient(I,nori);%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     level_feats = compute_gradient_features(R,IW,IH,locw,loch,gw,gh);%%%%%%%%%%%%%%%%%%%%%
 
-    %correct for padding
+
     locw(:) = locw(:) - padw;
     loch(:) = loch(:) - padh;
 
-    %concatenate the features
+
     count = size(level_feats,1);
     feats(num_feats+1:num_feats+count,:)  = level_feats;
     win_posw(num_feats+1:num_feats+count) = round(locw(:)*scales(s)); 
@@ -53,7 +53,7 @@ function [feats,R,win_posw,win_posh,winw,winh] = ...
     num_feats = num_feats + count;
   end; 
   
-  %write it to the outfile
+
   if(nargin == 7)
       dlmwrite(outfile,feats,'delimiter',' ');
   end
