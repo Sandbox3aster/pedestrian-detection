@@ -1,17 +1,17 @@
 function draw_roc(det_dir)
 if ismac
-img_dir = '/Volumes/Data/Dataset/INRIAPerson/Test/pos/'; % path to the pos example images
-gt_dir  = '/Volumes/Data/Matlab/pedestrian_detection/benchmark/gt_bbox/'; % comes with INRIA dataset and 
-                                                              % converted to txt format
+img_dir = '/Volumes/Data/Dataset/INRIAPerson/Test/pos/'; 
+gt_dir  = '/Volumes/Data/Matlab/pedestrian_detection/benchmark/gt_bbox/'; 
+                                               
 elseif ispc
 img_dir = 'E:/Dataset/INRIAPerson/Test/pos/';
 gt_dir  = 'E:/Matlab/pedestrian_detection/benchmark/gt_bbox/';
 end
 
-% non max supresession params
-nmax_param.sw = 0.1;                  %bandwidth along width
-nmax_param.sh = 0.1;                  %bandwidth along height 
-nmax_param.ss = 1.3;                  %bandwidth along scale 
+
+nmax_param.sw = 0.1;                
+nmax_param.sh = 0.1;                
+nmax_param.ss = 1.3;               
 
 clear det; clear fppi;        
 if ismac
