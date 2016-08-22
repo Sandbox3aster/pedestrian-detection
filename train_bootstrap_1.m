@@ -8,7 +8,7 @@ nmax_param.th = 0.0;
 scaleratio = 2^(1/8);
 nori=9;
 border=0;
-block_sizes = [ 64 32 16 6;  % block height, width in each column
+block_sizes = [ 64 32 16 6;  
                         64 32 16 6];
 full_360=0; 
 window_size=[128 64]; 
