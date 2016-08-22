@@ -1,4 +1,4 @@
-%compute the weighted concatenated features
+
 function f = concat_features(feats)
    num_feats = size(feats{1},1);
    dim_sum = 0;
