@@ -9,8 +9,8 @@ function [drect,dscores]=non_max_sp(rect,scores,param)
     dthresh = 1e-2;
     minw = min(rect(indx,3));
     minh = min(rect(indx,4));
-    
-    %scale this to the size of the smallest
+
+
     param.sw = param.sw*minw;
     param.sh = param.sh*minh;
     
@@ -22,13 +22,13 @@ function [drect,dscores]=non_max_sp(rect,scores,param)
         [pmode(i,:) wmode(i,:)] = compute_mode(i,p,w,param);
     end
     [umode,uscore] = compute_unique_modes(pmode,wmode,dthresh,param);
-    %convert to rectangles again
+
     sw = exp(umode(:,3))*minw;
     sh = exp(umode(:,4))*minh;
     drect = [umode(:,1)-0.5*sw umode(:,2)-0.5*sh sw sh];
     dscores = uscore + param.th;
 end
-%% compute modes
+
 function [pmode,wmode]=compute_mode(i,p,w,param)
     pmode = p(i,:);
     wmode = w(i);
@@ -50,7 +50,7 @@ function [pmode,wmode]=compute_mode(i,p,w,param)
     end
     wmode = sum(w.*wd);
 end
-%% compute the unique modes
+
 function [umode, uscore]=compute_unique_modes(pmode,wmode,thresh,param)
     npts = size(pmode,1);		
     tallones = ones(npts,1);
