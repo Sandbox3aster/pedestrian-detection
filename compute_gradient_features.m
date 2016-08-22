@@ -8,7 +8,7 @@ function feats=compute_gradient_features(R,W,H,locW,locH,gw,gh)
    end
 
    feat_indx = 1;
-   %loop over locations
+
    for posj=1:size(locW,2)
      for posi=1:size(locW,1)
        posw = locW(posi,posj);
@@ -21,7 +21,7 @@ function feats=compute_gradient_features(R,W,H,locW,locH,gw,gh)
 
        for l=1:nl
          dim_indx = 1;
-         %grid locations at this level(sentinel corrected)
+
          ww = gw{l}+1;
          hh = gh{l}+1;
          for j = 2:size(ww,2)
