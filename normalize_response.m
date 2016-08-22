@@ -1,12 +1,12 @@
 function N=normalize_response(R)
-    blocksize=16; % every block OE is normalized to sum to 1
+    blocksize=16; 
     normconst=4.0;
     [H W nch]=size(R);
     [ww hh]=get_sampling_grid(W,H,[blocksize;blocksize]);
-    %correct for sentinel
+
     ww = ww{1}+1;
     hh = hh{1}+1;
-    %compute cumulative sum
+
     C=cumsum2D(sum(R,3));
     N=zeros(size(R),'double');
     for i = 2:size(ww,1)
