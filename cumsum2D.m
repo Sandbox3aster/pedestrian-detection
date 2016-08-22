@@ -1,5 +1,3 @@
-%computes a cumulative sum for a 2D array
-%additionally adds a sentinel (zero row/colum)
 
 function CD = cumsum2D(D)
    CD = zeros(size(D,1)+1,size(D,2)+1,size(D,3));
