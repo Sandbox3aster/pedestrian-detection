@@ -1,4 +1,4 @@
-%computes the locations of the grid points
+
 function [ww hh] = get_sampling_grid(w,h,blocks)
    num_levels = size(blocks,2);
    ww = cell(num_levels,1);
