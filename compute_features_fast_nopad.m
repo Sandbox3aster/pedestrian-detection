@@ -1,11 +1,10 @@
-%compute features over scalespace
+
 function [feats,win_posw,win_posh,winw,winh] = ...
     compute_features_fast(im,nori,border,window_size,block_sizes,...
                           strideh,stridew,scaleratio,offh,offw,model)
   
   if (exist('model')==1),
-    fprintf('Using model\n');  % will return evaluation of model at
-                               % each locaiton instead of features
+    fprintf('Using model\n');  
   end
   if (isnumeric(im)),
     II = im;
@@ -42,7 +41,7 @@ function [feats,win_posw,win_posh,winw,winh] = ...
 %      I = imresize(II,1/scales(s));
 %      I = padarray(I,[padh padw],'replicate');
       
-      %generate a bunch of locations
+
       h = ceil((size(II,1)/scales(s)))+2*padh;
       w = ceil((size(II,2)/scales(s)))+2*padw; 
       offsetw = offw+max(border,floor(mod(w,fake_stridew)/2))+1;
@@ -62,7 +61,7 @@ function [feats,win_posw,win_posh,winw,winh] = ...
     I = imresize(II,1/scales(s));
     I = padarray(I,[padh padw],'replicate');
 
-    %generate a bunch of locations
+
     [h w nch] = size(I);
     offsetw = offw+max(border,floor(mod(w,fake_stridew)/2))+1;
     offseth = offh+max(border,floor(mod(h,fake_strideh)/2))+1;
@@ -74,7 +73,7 @@ function [feats,win_posw,win_posh,winw,winh] = ...
     R(:,1:border,:)=0;
     R(end-border+1:end,:,:)=0;
     R(:,end-border+1:end,:)=0;
-%    keyboard
+
     
     nr = sum(R,3);
     if (mod(strideh,8)~=0)||(mod(stridew,8)~=0),
@@ -86,7 +85,7 @@ function [feats,win_posw,win_posh,winw,winh] = ...
     nr = nr(mi:end,mj:end);
     
     [ai,aj]=size(nr);
-    padi = 16-mod(ai,16); %% assumes 16x16 normalization
+    padi = 16-mod(ai,16);
     padj = 16-mod(aj,16);
     nr = [nr, zeros(size(nr,1),padj); zeros(padi,size(nr,2)), ...
           zeros(padi,padj)];
@@ -95,8 +94,7 @@ function [feats,win_posw,win_posh,winw,winh] = ...
     nr = nr(8:16:end,8:16:end);
     nr = imresize(nr,16,'nearest');
     nr = nr(1:end-padi,1:end-padj);
-    nr = nr + 4;  % value depends on many things...
-%    nr = repmat(nr,[1 1 size(R,3)]);
+    nr = nr + 4; 
     newR = zeros(size(R),'single');
     for chind=1:size(R,3),
       newR(mi:end,mj:end,chind)=R(mi:end,mj:end,chind)./nr;
@@ -137,12 +135,11 @@ function [feats,win_posw,win_posh,winw,winh] = ...
       f(i,:) = f(i,:)/sum(f(i,1:18)+1e-8);
     end
     
-    
-    %correct for padding
+
     locw(:) = locw(:) - padw;
     loch(:) = loch(:) - padh;
 
-    %concatenate the features
+
     count = size(f,1);
     feats(num_feats+1:num_feats+count,:)  = f;
     win_posw(num_feats+1:num_feats+count) = round(locw(:)*scales(s)); 
