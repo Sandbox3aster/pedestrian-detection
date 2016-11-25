@@ -1,7 +1,7 @@
 # pedestrian-detection
-毕设行人检测程序，使用使用HoG检测子和SVM进行训练与检测的程序
+Towards real-time Pedestrain detection base on pyramid histogram of oriented gradient (PHOG) and support vector machine (SVM) with the histogram intersection kernel (HIK).
 
-方法基于以下论文
+Reference
 
 [1] DALAL N, TRIGGS B. Histograms of Oriented Gradients for Human Detection[C]//IEEE, 1: 886–893.
 
